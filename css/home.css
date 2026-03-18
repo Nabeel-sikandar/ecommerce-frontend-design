@@ -1,0 +1,363 @@
+/* ============================================================
+   HOME.CSS — Hero, Deals, Categories, Quote, Recommended,
+              Services, Suppliers
+   ============================================================ */
+
+/* --- Hero Section --- */
+.hero {
+  background: var(--bg-white);
+  padding: 16px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
+  gap: 16px;
+  min-height: 360px;
+}
+
+/* Hero Sidebar */
+.hero-sidebar { background: var(--bg-white); border-radius: var(--radius-md); }
+
+.category-list li a {
+  display: block;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--text-dark);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+}
+.category-list li a:hover {
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+}
+
+/* Hero Banner */
+.hero-banner {
+  background: linear-gradient(135deg, #1C74E8, #4BA3F5);
+  border-radius: var(--radius-md);
+  padding: 30px 30px 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.hero-banner-content { padding-bottom: 30px; }
+.hero-subtitle { color: rgba(255, 255, 255, 0.8); font-size: 14px; margin-bottom: 4px; }
+.hero-title { color: #fff; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+
+.btn-learn-more {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #fff;
+  color: var(--text-dark);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.btn-learn-more:hover { background: var(--bg-gray); }
+
+.hero-banner-img { max-width: 260px; }
+.hero-banner-img img { border-radius: var(--radius-md); object-fit: cover; width: 100%; }
+
+/* Hero Right Cards */
+.hero-right { display: flex; flex-direction: column; gap: 10px; }
+
+.hero-user-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+
+.user-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--primary-blue-light);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary-blue);
+  font-size: 18px;
+}
+
+.user-info-row p { font-size: 13px; line-height: 1.4; }
+
+.hero-promo-card {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+.hero-promo-card.orange { background: linear-gradient(135deg, #F38332, #F7A56E); }
+.hero-promo-card.teal { background: linear-gradient(135deg, #55BDC3, #7DD3D8); }
+
+
+/* --- Deals & Offers --- */
+.deals-section { padding: 20px 0; }
+
+.deals-grid {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.deals-info {
+  min-width: 220px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deals-info h2 { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
+.deals-info > p { font-size: 14px; color: var(--text-gray); margin-bottom: 16px; }
+
+.countdown { display: flex; gap: 8px; }
+
+.countdown-item {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 46px; height: 46px;
+  background: var(--bg-gray);
+  border-radius: var(--radius-sm);
+}
+.countdown-item span { font-size: 16px; font-weight: 700; line-height: 1; }
+.countdown-item small { font-size: 11px; color: var(--text-gray); }
+
+.deals-products { display: flex; flex: 1; }
+
+.deal-card {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 16px;
+  border-left: 1px solid var(--border-color);
+  text-align: center;
+  transition: background 0.2s;
+}
+.deal-card:hover { background: var(--bg-light); }
+
+.deal-img {
+  width: 140px; height: 140px;
+  margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.deal-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.deal-card p { font-size: 14px; margin-bottom: 6px; }
+
+.deal-badge {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-size: 13px; font-weight: 500;
+  color: #fff;
+}
+.deal-badge.red { background: var(--danger-red); }
+.deal-badge.orange { background: var(--warning-orange); }
+.deal-badge.green { background: var(--success-green); }
+
+
+/* --- Category Sections (Home & Outdoor, Electronics) --- */
+.category-section { padding: 20px 0; }
+
+.category-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.category-banner {
+  padding: 24px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+}
+.category-banner.blue-gradient { background: linear-gradient(180deg, #E3F0FF, #FFF); }
+.category-banner.orange-gradient { background: linear-gradient(180deg, #FFEEE2, #FFF); }
+
+.category-banner h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+
+.btn-source {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #fff;
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 500;
+  transition: all 0.2s;
+  width: fit-content;
+}
+.btn-source:hover {
+  background: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+}
+
+.category-items { display: grid; grid-template-columns: repeat(4, 1fr); }
+
+.category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-left: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.category-item:hover { background: var(--bg-light); }
+
+.cat-item-info p { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.cat-item-info span { font-size: 13px; color: var(--text-gray); line-height: 1.4; }
+.category-item img { width: 80px; height: 80px; object-fit: contain; }
+
+
+/* --- Quote / Request Section --- */
+.quote-section { padding: 30px 0; }
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(135deg, #127FFF, #56A8F5);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 340px;
+}
+
+.quote-info {
+  padding: 40px;
+  color: #fff;
+  display: flex; flex-direction: column;
+  justify-content: center;
+}
+.quote-info h2 { font-size: 26px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+.quote-info p { font-size: 15px; opacity: 0.85; line-height: 1.6; }
+
+.quote-form-wrap {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin: 24px 24px 24px 0;
+}
+.quote-form-wrap h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+
+.quote-form { display: flex; flex-direction: column; gap: 12px; }
+
+.quote-form input,
+.quote-form textarea,
+.quote-form select {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  resize: none;
+}
+
+.quote-row { display: flex; gap: 8px; }
+.quote-row input { flex: 1; }
+.quote-row select { width: 80px; }
+.quote-form .btn-primary { width: fit-content; }
+
+
+/* --- Recommended Items --- */
+.recommended-section { padding: 30px 0; }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: left;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+.product-card:hover { box-shadow: var(--shadow-md); }
+
+.product-card-img {
+  width: 100%; height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px;
+}
+.product-card-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.product-card-price { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.product-card-name { font-size: 13px; color: var(--text-gray); line-height: 1.4; }
+
+
+/* --- Services --- */
+.services-section { padding: 20px 0; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.service-card { text-align: center; cursor: pointer; }
+
+.service-img {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 12px;
+  height: 200px;
+}
+.service-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.service-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.service-img:hover .service-overlay { opacity: 1; }
+
+.service-overlay i {
+  font-size: 36px; color: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.service-card p { font-size: 14px; line-height: 1.5; }
+
+
+/* --- Suppliers by Region --- */
+.suppliers-section { padding: 20px 0 30px; }
+
+.suppliers-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.supplier-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.supplier-item img { width: 28px; height: 20px; border-radius: 2px; object-fit: cover; flex-shrink: 0; }
+.supplier-item div { display: flex; flex-direction: column; }
+.supplier-item span { font-size: 14px; }
+.supplier-item small { font-size: 12px; color: var(--text-gray); }

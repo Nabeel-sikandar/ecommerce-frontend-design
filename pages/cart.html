@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cart - Ecommerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/footer.css">
+</head>
+<body>
+
+  <!-- CART HEADER (simplified - no search) -->
+  <header class="header">
+    <div class="header-top container">
+      <a href="../index.html" class="header-logo"><img src="../images/brand/logo.png" alt="Brand" class="logo-img"></a>
+      <div style="flex:1;"></div>
+      <nav class="header-icons">
+        <a href="#" class="header-icon-item"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+        <a href="#" class="header-icon-item"><i class="fa-regular fa-message"></i><span>Message</span></a>
+        <a href="#" class="header-icon-item"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
+        <a href="cart.html" class="header-icon-item"><i class="fa-solid fa-cart-shopping"></i><span>My cart</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <h2 class="cart-title">My cart (<span id="cartCount">0</span>)</h2>
+
+      <div class="cart-layout">
+        <!-- Cart Items -->
+        <div class="cart-items" id="cartItems">
+          <p class="cart-empty" id="cartEmpty">Your cart is empty. <a href="../index.html">Start shopping!</a></p>
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+          <div class="coupon-box">
+            <p>Have a coupon?</p>
+            <div class="coupon-input">
+              <input type="text" placeholder="Add coupon" id="couponInput">
+              <button onclick="applyCoupon()">Apply</button>
+            </div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-row"><span>Subtotal:</span><span id="subtotal">$0.00</span></div>
+            <div class="summary-row discount"><span>Discount:</span><span id="discount">- $0.00</span></div>
+            <div class="summary-row tax"><span>Tax:</span><span id="tax">+ $0.00</span></div>
+            <div class="summary-row total"><span>Total:</span><span id="total">$0.00</span></div>
+            <button class="btn-checkout" onclick="checkout()">Checkout</button>
+            <div class="payment-icons">
+              <img src="https://cdn-icons-png.flaticon.com/24/196/196578.png" alt="Amex">
+              <img src="https://cdn-icons-png.flaticon.com/24/196/196561.png" alt="Mastercard">
+              <img src="https://cdn-icons-png.flaticon.com/24/196/196565.png" alt="PayPal">
+              <img src="https://cdn-icons-png.flaticon.com/24/196/196566.png" alt="Visa">
+              <img src="https://cdn-icons-png.flaticon.com/24/5968/5968144.png" alt="Apple Pay">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-actions">
+        <a href="../index.html" class="btn-primary"><i class="fa-solid fa-arrow-left"></i> Back to shop</a>
+        <button class="btn-outline" onclick="clearCart()">Remove all</button>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="trust-badges">
+        <div class="badge-item"><i class="fa-solid fa-lock"></i><div><strong>Secure payment</strong><p>Have you ever finally just</p></div></div>
+        <div class="badge-item"><i class="fa-regular fa-message"></i><div><strong>Customer support</strong><p>Have you ever finally just</p></div></div>
+        <div class="badge-item"><i class="fa-solid fa-truck"></i><div><strong>Free delivery</strong><p>Have you ever finally just</p></div></div>
+      </div>
+
+      <!-- Saved for Later -->
+      <section class="saved-section">
+        <h2 class="section-title">Saved for later</h2>
+        <div class="saved-grid" id="savedItems"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- DISCOUNT BANNER -->
+  <section class="discount-banner">
+    <div class="container">
+      <div class="discount-content">
+        <div><h3>Super discount on more than 100 USD</h3><p>Have you ever finally just write dummy info</p></div>
+        <a href="#" class="btn-shop-now">Shop now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="footer-logo"><img src="../images/brand/logo.png" alt="Brand" class="logo-img"></div><p>Best information about the company gies here but now lorem ipsum is</p><div class="footer-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div></div>
+        <div class="footer-column"><h4>About</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div>
+        <div class="footer-column"><h4>Partnership</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div>
+        <div class="footer-column"><h4>Information</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Money Refund</a></li><li><a href="#">Shipping</a></li><li><a href="#">Contact us</a></li></ul></div>
+        <div class="footer-column"><h4>For users</h4><ul><li><a href="#">Login</a></li><li><a href="#">Register</a></li><li><a href="#">Settings</a></li><li><a href="#">My Orders</a></li></ul></div>
+        <div class="footer-column"><h4>Get app</h4><div class="footer-apps"><a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt=""></a><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt=""></a></div></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2023 Ecommerce.</p><div class="footer-lang"><img src="../images/flags/US@2x.png" alt="" class="flag"><span>English</span><i class="fa-solid fa-chevron-up"></i></div></div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/cart.js"></script>
+</body>
+</html>

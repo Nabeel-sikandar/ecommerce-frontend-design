@@ -1,0 +1,159 @@
+/* ============================================================
+   HEADER.CSS — Top Header + Sub Navigation
+   ============================================================ */
+
+/* --- Main Header Bar --- */
+.header {
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px;
+  gap: 16px;
+}
+
+/* Logo */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Search Bar */
+.header-search {
+  display: flex;
+  flex: 1;
+  max-width: 580px;
+  border: 2px solid var(--primary-blue);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.header-search input {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  font-size: 15px;
+}
+.header-search input::placeholder { color: var(--text-gray); }
+
+.header-search select {
+  padding: 10px 12px;
+  border: none;
+  border-left: 2px solid var(--primary-blue);
+  background: var(--bg-gray);
+  color: var(--text-medium);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.header-search .search-btn {
+  padding: 10px 22px;
+  background: var(--primary-blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.header-search .search-btn:hover { background: var(--primary-blue-hover); }
+
+/* Header Icons (Profile, Message, Orders, Cart) */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.header-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-gray);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.header-icon-item i {
+  font-size: 20px;
+  color: var(--text-gray);
+  transition: color 0.2s;
+}
+
+.header-icon-item:hover,
+.header-icon-item:hover i {
+  color: var(--primary-blue);
+}
+
+/* --- Sub Navigation --- */
+.header-bottom {
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-bottom .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-left a {
+  font-size: 15px;
+  color: var(--text-dark);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-left a:hover { color: var(--primary-blue); }
+
+.nav-left .all-category {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+.nav-left .all-category i { font-size: 18px; }
+
+.nav-link-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link-dropdown i { font-size: 12px; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-right .lang-select,
+.nav-right .ship-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-dark);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav-right .lang-select i,
+.nav-right .ship-select i {
+  font-size: 10px;
+  color: var(--text-gray);
+}

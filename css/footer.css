@@ -1,0 +1,186 @@
+/* ============================================================
+   FOOTER.CSS — Newsletter + Footer Grid + Bottom Bar
+   ============================================================ */
+
+/* --- Newsletter Section --- */
+.newsletter {
+  background: var(--bg-gray);
+  padding: 40px 0;
+  text-align: center;
+}
+
+.newsletter h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.newsletter p {
+  font-size: 15px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  background: #fff;
+}
+.newsletter-form input::placeholder { color: var(--text-gray); }
+
+.newsletter-form button {
+  padding: 10px 20px;
+  background: var(--primary-blue);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.newsletter-form button:hover { background: var(--primary-blue-hover); }
+
+/* --- Main Footer --- */
+.footer {
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-color);
+  padding: 40px 0 0;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1.2fr;
+  gap: 24px;
+  padding-bottom: 32px;
+}
+
+/* Brand Column */
+.footer-brand .footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.footer-brand .logo-img { height: 30px; }
+
+.footer-brand p {
+  font-size: 14px;
+  color: var(--text-gray);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  max-width: 260px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-socials a {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.footer-socials a:hover {
+  background: var(--primary-blue);
+  color: #fff;
+}
+
+/* Footer Link Columns */
+.footer-column h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.footer-column ul li { margin-bottom: 8px; }
+
+.footer-column ul li a {
+  font-size: 14px;
+  color: var(--text-gray);
+  transition: color 0.2s;
+}
+.footer-column ul li a:hover { color: var(--primary-blue); }
+
+/* App Download Buttons */
+.footer-apps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-apps a img { height: 36px; border-radius: 6px; }
+
+/* --- Bottom Bar --- */
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+.footer-bottom .footer-lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* --- Discount Banner --- */
+.discount-banner {
+  background: linear-gradient(135deg, #127FFF, #56A8F5);
+  padding: 24px 0;
+  margin-top: 20px;
+}
+
+.discount-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.discount-content h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.discount-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.btn-shop-now {
+  padding: 10px 20px;
+  background: #FF9017;
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.btn-shop-now:hover { background: #e0800f; }
