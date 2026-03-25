@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - NBL Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/footer.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-top container">
+      <a href="../index.html" class="header-logo"><img src="../images/brand/logo.png" alt="NBL Store" class="logo-img"></a>
+      <div class="header-search">
+        <input type="text" placeholder="Search" id="searchInput">
+        <select id="searchCategory"><option value="">All category</option><option value="clothes">Clothes</option><option value="electronics">Electronics</option><option value="home">Home</option></select>
+        <button class="search-btn" onclick="handleSearch()">Search</button>
+      </div>
+      <nav class="header-icons">
+        <a href="profile.html" class="header-icon-item"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('messageModal')"><i class="fa-regular fa-message"></i><span>Message</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('ordersModal')"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
+        <a href="cart.html" class="header-icon-item"><i class="fa-solid fa-cart-shopping"></i><span>My cart</span></a>
+      </nav>
+    </div>
+  </header>
+  <nav class="header-bottom">
+    <div class="container">
+      <div class="nav-left">
+        <a href="product-listing.html?category=all" class="all-category"><i class="fa-solid fa-bars"></i><span>All category</span></a>
+        <a href="product-listing.html?filter=deals">Hot offers</a>
+        <a href="product-listing.html?category=clothes">Gift boxes</a>
+        <a href="product-listing.html?category=electronics">Projects</a>
+        <a href="product-listing.html?category=home">Menu Item</a>
+        <div class="nav-dropdown-wrap">
+          <a href="#" class="nav-link-dropdown" onclick="toggleDropdown('helpDropdown', event)"><span>Help</span><i class="fa-solid fa-chevron-down"></i></a>
+          <div class="dropdown-menu" id="helpDropdown"><a href="#">Help Center</a><a href="#">Money Refund</a><a href="#">Shipping Info</a><a href="#">Contact Us</a></div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-dropdown-wrap">
+          <div class="lang-select" onclick="toggleDropdown('langDropdown', event)"><span>English, USD</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="langDropdown"><a href="#" onclick="changeLang('English, USD', event)">English, USD</a><a href="#" onclick="changeLang('Urdu, RS', event)">اردو, PKR</a></div>
+        </div>
+        <div class="nav-dropdown-wrap">
+          <div class="ship-select" onclick="toggleDropdown('shipDropdown', event)"><span>Ship to</span><img src="../images/flags/DE@2x.png" alt="" class="flag" id="shipFlag"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="shipDropdown"><a href="#" onclick="changeShip('../images/flags/DE@2x.png','Germany',event)"><img src="../images/flags/DE@2x.png" class="flag"> Germany</a><a href="#" onclick="changeShip('../images/flags/US@2x.png','USA',event)"><img src="../images/flags/US@2x.png" class="flag"> USA</a></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="messageModal"><div class="modal-box"><div class="modal-header"><h3>Messages</h3><button onclick="closeModal('messageModal')">&times;</button></div><div class="modal-body"><i class="fa-regular fa-message" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i><p>No messages yet.</p><button class="btn-primary" onclick="closeModal('messageModal')">Close</button></div></div></div>
+  <div class="modal-overlay" id="ordersModal"><div class="modal-box"><div class="modal-header"><h3>My Orders</h3><button onclick="closeModal('ordersModal')">&times;</button></div><div class="modal-body" id="ordersModalBody"><i class="fa-solid fa-box" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i><p>No orders yet.</p></div></div></div>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>My Profile</span>
+      </div>
+
+      <section class="profile-section">
+        <div class="profile-layout">
+          <!-- Sidebar -->
+          <div class="profile-sidebar">
+            <div class="profile-avatar"><i class="fa-regular fa-user"></i></div>
+            <h3 id="sidebarName">User</h3>
+            <p id="sidebarEmail">user@email.com</p>
+            <nav class="profile-nav">
+              <a href="profile.html" class="active"><i class="fa-regular fa-user"></i> My Account</a>
+              <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart</a>
+              <a href="product-listing.html?category=all"><i class="fa-regular fa-heart"></i> Wishlist</a>
+              <a href="#" onclick="loadOrders()"><i class="fa-solid fa-box"></i> My Orders</a>
+              <a href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+            </nav>
+          </div>
+
+          <!-- Content -->
+          <div class="profile-content">
+            <h2>My Account</h2>
+            <div class="profile-info-grid">
+              <div class="profile-info-item"><label>Full Name</label><p id="profileName">—</p></div>
+              <div class="profile-info-item"><label>Email</label><p id="profileEmail">—</p></div>
+              <div class="profile-info-item"><label>Phone</label><p id="profilePhone">—</p></div>
+              <div class="profile-info-item"><label>Address</label><p id="profileAddress">—</p></div>
+              <div class="profile-info-item"><label>City</label><p id="profileCity">—</p></div>
+              <div class="profile-info-item"><label>Country</label><p id="profileCountry">—</p></div>
+              <div class="profile-info-item"><label>Member Since</label><p id="profileJoinDate">—</p></div>
+            </div>
+            <div class="profile-actions">
+              <button class="btn-primary" onclick="editProfile()"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+              <button class="btn-outline" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket"></i> Log out</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 NBL Store.</p>
+        <div class="footer-lang"><img src="../images/flags/US@2x.png" alt="" class="flag"><span>English</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() { loadProfile(); });
+    function loadOrders() {
+      var orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      var body = document.getElementById('ordersModalBody');
+      if (!orders.length) { openModal('ordersModal'); return; }
+      body.innerHTML = orders.map(function(o) {
+        return '<div style="padding:12px;border:1px solid var(--border-color);border-radius:8px;margin-bottom:8px;text-align:left;">' +
+          '<strong>Order ' + o.id + '</strong><br>' +
+          '<small style="color:var(--text-gray);">' + o.date + ' · ' + o.status + '</small><br>' +
+          '<span style="font-weight:600;">' + formatPrice(o.total) + '</span>' +
+        '</div>';
+      }).join('');
+      openModal('ordersModal');
+    }
+  </script>
+</body>
+</html>

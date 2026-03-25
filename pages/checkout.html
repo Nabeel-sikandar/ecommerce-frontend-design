@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - NBL Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/footer.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top container">
+      <a href="../index.html" class="header-logo"><img src="../images/brand/logo.png" alt="NBL Store" class="logo-img"></a>
+      <div style="flex:1;"></div>
+      <nav class="header-icons">
+        <a href="profile.html" class="header-icon-item"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+        <a href="cart.html" class="header-icon-item"><i class="fa-solid fa-cart-shopping"></i><span>My cart</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><i class="fa-solid fa-chevron-right"></i>
+        <a href="cart.html">Cart</a><i class="fa-solid fa-chevron-right"></i>
+        <span>Checkout</span>
+      </div>
+
+      <!-- Checkout Form + Summary -->
+      <section class="checkout-section">
+        <div class="checkout-layout">
+
+          <!-- Left: Forms -->
+          <div class="checkout-form-area">
+
+            <!-- Shipping Details -->
+            <div class="checkout-block">
+              <h3><i class="fa-solid fa-truck" style="margin-right:8px;color:var(--primary-blue);"></i>Shipping Details</h3>
+              <form id="checkoutForm" onsubmit="placeOrder(event)">
+                <div class="form-row">
+                  <div class="form-group"><label>First Name *</label><input type="text" id="checkoutFname" placeholder="John" required></div>
+                  <div class="form-group"><label>Last Name *</label><input type="text" id="checkoutLname" placeholder="Doe" required></div>
+                </div>
+                <div class="form-group"><label>Email *</label><input type="email" id="checkoutEmail" placeholder="john@email.com" required></div>
+                <div class="form-group"><label>Phone</label><input type="tel" id="checkoutPhone" placeholder="+92 3XX XXXXXXX"></div>
+                <div class="form-group"><label>Address *</label><input type="text" id="checkoutAddress" placeholder="Street address, apartment, etc." required></div>
+                <div class="form-row">
+                  <div class="form-group"><label>City *</label><input type="text" id="checkoutCity" placeholder="City" required></div>
+                  <div class="form-group"><label>Zip Code</label><input type="text" id="checkoutZip" placeholder="12345"></div>
+                </div>
+                <div class="form-group">
+                  <label>Country</label>
+                  <select id="checkoutCountry">
+                    <option>Pakistan</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="checkout-block">
+              <h3><i class="fa-solid fa-credit-card" style="margin-right:8px;color:var(--primary-blue);"></i>Payment Method</h3>
+              <div class="payment-methods">
+                <label class="payment-method active">
+                  <input type="radio" name="payment" value="cod" checked>
+                  <i class="fa-solid fa-money-bill-wave"></i>
+                  <span>Cash on Delivery</span>
+                </label>
+                <label class="payment-method">
+                  <input type="radio" name="payment" value="card">
+                  <i class="fa-solid fa-credit-card"></i>
+                  <span>Credit / Debit Card</span>
+                </label>
+                <label class="payment-method">
+                  <input type="radio" name="payment" value="bank">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <span>Bank Transfer</span>
+                </label>
+                <label class="payment-method">
+                  <input type="radio" name="payment" value="jazzcash">
+                  <i class="fa-solid fa-mobile-screen"></i>
+                  <span>JazzCash / EasyPaisa</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="auth-btn" onclick="placeOrder(event)" style="max-width:100%;">
+              <i class="fa-solid fa-lock" style="margin-right:8px;"></i>Place Order
+            </button>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div id="orderItems">
+              <!-- Filled by JS -->
+            </div>
+            <div class="order-totals">
+              <div class="summary-row"><span>Subtotal:</span><span id="checkoutSubtotal">$0.00</span></div>
+              <div class="summary-row"><span>Shipping:</span><span id="checkoutShipping">Free</span></div>
+              <div class="summary-row"><span>Tax:</span><span id="checkoutTax">$0.00</span></div>
+              <div class="summary-row total"><span>Total:</span><span id="checkoutTotal">$0.00</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Success Message (hidden by default) -->
+      <div class="success-message" id="checkoutSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <h2>Order Placed Successfully!</h2>
+        <p>Your order <strong id="orderNumber">#NBL-000000</strong> has been confirmed.<br>You will receive a confirmation email shortly.</p>
+        <a href="../index.html" class="btn-primary" style="margin-right:8px;">Continue Shopping</a>
+        <a href="profile.html" class="btn-outline">View Orders</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 NBL Store.</p>
+        <div class="footer-lang"><img src="../images/flags/US@2x.png" alt="" class="flag"><span>English</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCheckout();
+      // Auto-fill if logged in
+      var user = Auth.getUser();
+      if (user) {
+        var fname = document.getElementById('checkoutFname');
+        var email = document.getElementById('checkoutEmail');
+        var phone = document.getElementById('checkoutPhone');
+        var address = document.getElementById('checkoutAddress');
+        var city = document.getElementById('checkoutCity');
+        if (fname && user.name) { var parts = user.name.split(' '); fname.value = parts[0]; var lname = document.getElementById('checkoutLname'); if (lname && parts[1]) lname.value = parts.slice(1).join(' '); }
+        if (email) email.value = user.email || '';
+        if (phone) phone.value = user.phone || '';
+        if (address) address.value = user.address || '';
+        if (city) city.value = user.city || '';
+      }
+      // Payment method active styling
+      document.querySelectorAll('.payment-method input').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          document.querySelectorAll('.payment-method').forEach(function(m) { m.classList.remove('active'); });
+          this.closest('.payment-method').classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

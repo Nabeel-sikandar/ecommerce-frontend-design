@@ -15,161 +15,97 @@
 </head>
 <body>
 
-  <!-- HEADER (same) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-top container">
       <a href="../index.html" class="header-logo"><img src="../images/brand/logo.png" alt="Brand" class="logo-img"></a>
-      <div class="header-search"><input type="text" placeholder="Search"><select><option>All category</option></select><button class="search-btn">Search</button></div>
+      <div class="header-search">
+        <input type="text" placeholder="Search" id="searchInput">
+        <select id="searchCategory"><option value="">All category</option><option value="clothes">Clothes and wear</option><option value="home">Home interiors</option><option value="electronics">Computer and tech</option></select>
+        <button class="search-btn" onclick="handleSearch()">Search</button>
+      </div>
       <nav class="header-icons">
-        <a href="#" class="header-icon-item"><i class="fa-regular fa-user"></i><span>Profile</span></a>
-        <a href="#" class="header-icon-item"><i class="fa-regular fa-message"></i><span>Message</span></a>
-        <a href="#" class="header-icon-item"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('profileModal')"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('messageModal')"><i class="fa-regular fa-message"></i><span>Message</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('ordersModal')"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
         <a href="cart.html" class="header-icon-item"><i class="fa-solid fa-cart-shopping"></i><span>My cart</span></a>
       </nav>
     </div>
   </header>
-  <nav class="header-bottom"><div class="container"><div class="nav-left"><a href="#" class="all-category"><i class="fa-solid fa-bars"></i><span>All category</span></a><a href="#">Hot offers</a><a href="#">Gift boxes</a><a href="#">Projects</a><a href="#">Menu Item</a><a href="#" class="nav-link-dropdown"><span>Help</span><i class="fa-solid fa-chevron-down"></i></a></div><div class="nav-right"><div class="lang-select"><span>English, USD</span><i class="fa-solid fa-chevron-down"></i></div><div class="ship-select"><span>Ship to</span><img src="../images/flags/DE@2x.png" alt="" class="flag"><i class="fa-solid fa-chevron-down"></i></div></div></div></nav>
+  <nav class="header-bottom">
+    <div class="container">
+      <div class="nav-left">
+        <a href="product-listing.html?category=all" class="all-category"><i class="fa-solid fa-bars"></i><span>All category</span></a>
+        <a href="product-listing.html?filter=deals">Hot offers</a>
+        <a href="product-listing.html?category=clothes">Gift boxes</a>
+        <a href="product-listing.html?category=electronics">Projects</a>
+        <a href="product-listing.html?category=home">Menu Item</a>
+        <div class="nav-dropdown-wrap">
+          <a href="#" class="nav-link-dropdown" onclick="toggleDropdown('helpDropdown', event)"><span>Help</span><i class="fa-solid fa-chevron-down"></i></a>
+          <div class="dropdown-menu" id="helpDropdown"><a href="#">Help Center</a><a href="#">Money Refund</a><a href="#">Shipping Info</a><a href="#">Contact Us</a></div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-dropdown-wrap">
+          <div class="lang-select" onclick="toggleDropdown('langDropdown', event)"><span>English, USD</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="langDropdown"><a href="#" onclick="changeLang('English, USD', event)">English, USD</a><a href="#" onclick="changeLang('Urdu, RS', event)">اردو, PKR</a><a href="#" onclick="changeLang('Deutsch, EUR', event)">Deutsch, EUR</a></div>
+        </div>
+        <div class="nav-dropdown-wrap">
+          <div class="ship-select" onclick="toggleDropdown('shipDropdown', event)"><span>Ship to</span><img src="../images/flags/DE@2x.png" alt="" class="flag" id="shipFlag"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="shipDropdown"><a href="#" onclick="changeShip('../images/flags/DE@2x.png','Germany',event)"><img src="../images/flags/DE@2x.png" class="flag"> Germany</a><a href="#" onclick="changeShip('../images/flags/US@2x.png','USA',event)"><img src="../images/flags/US@2x.png" class="flag"> United States</a><a href="#" onclick="changeShip('../images/flags/GB@2x.png','UK',event)"><img src="../images/flags/GB@2x.png" class="flag"> United Kingdom</a></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- MODALS -->
+  <div class="modal-overlay" id="profileModal"><div class="modal-box"><div class="modal-header"><h3>Profile</h3><button onclick="closeModal('profileModal')">&times;</button></div><div class="modal-body"><div class="modal-avatar"><i class="fa-regular fa-user"></i></div><p>Welcome! Please log in.</p><button class="btn-primary btn-block" onclick="closeModal('profileModal')">Log in</button><button class="btn-outline btn-block" onclick="closeModal('profileModal')">Register</button></div></div></div>
+  <div class="modal-overlay" id="messageModal"><div class="modal-box"><div class="modal-header"><h3>Messages</h3><button onclick="closeModal('messageModal')">&times;</button></div><div class="modal-body"><i class="fa-regular fa-message" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i><p>No messages yet.</p><button class="btn-primary" onclick="closeModal('messageModal')">Browse Suppliers</button></div></div></div>
+  <div class="modal-overlay" id="ordersModal"><div class="modal-box"><div class="modal-header"><h3>My Orders</h3><button onclick="closeModal('ordersModal')">&times;</button></div><div class="modal-body"><i class="fa-solid fa-box" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i><p>No orders yet.</p><a href="product-listing.html?category=all" class="btn-primary" onclick="closeModal('ordersModal')">Shop Now</a></div></div></div>
 
   <main class="main-content">
     <div class="container">
-      <div class="breadcrumb">
-        <a href="../index.html">Home</a><i class="fa-solid fa-chevron-right"></i>
-        <a href="#">Clothings</a><i class="fa-solid fa-chevron-right"></i>
-        <a href="#">Men's wear</a><i class="fa-solid fa-chevron-right"></i>
-        <span>Summer clothing</span>
-      </div>
+      <div class="breadcrumb"><a href="../index.html">Home</a><i class="fa-solid fa-chevron-right"></i><a href="product-listing.html?category=clothes">Clothings</a><i class="fa-solid fa-chevron-right"></i><a href="product-listing.html?category=clothes">Men's wear</a><i class="fa-solid fa-chevron-right"></i><span>Product Detail</span></div>
 
-      <!-- PRODUCT DETAIL TOP -->
       <div class="detail-top">
-        <!-- Left: Images -->
         <div class="detail-images">
           <div class="detail-main-img"><img id="mainImage" src="../images/cloth/tshirt-blue.png" alt="Product"></div>
-          <div class="detail-thumbnails">
-            <img src="../images/cloth/tshirt-blue.png" alt="" class="thumb active" onclick="changeImage(this)">
-            <img src="../images/cloth/tshirt-gray.png" alt="" class="thumb" onclick="changeImage(this)">
-            <img src="../images/cloth/jacket.png" alt="" class="thumb" onclick="changeImage(this)">
-            <img src="../images/cloth/shorts.png" alt="" class="thumb" onclick="changeImage(this)">
-            <img src="../images/cloth/bag.png" alt="" class="thumb" onclick="changeImage(this)">
-          </div>
+          <div class="detail-thumbnails"><img src="../images/cloth/tshirt-blue.png" alt="" class="thumb active" onclick="changeImage(this)"><img src="../images/cloth/tshirt-gray.png" alt="" class="thumb" onclick="changeImage(this)"><img src="../images/cloth/jacket.png" alt="" class="thumb" onclick="changeImage(this)"><img src="../images/cloth/shorts.png" alt="" class="thumb" onclick="changeImage(this)"><img src="../images/cloth/bag.png" alt="" class="thumb" onclick="changeImage(this)"></div>
         </div>
-
-        <!-- Center: Info -->
         <div class="detail-info">
           <span class="in-stock"><i class="fa-solid fa-check"></i> In stock</span>
-          <h1 class="detail-title">Mens Long Sleeve T-shirt Cotton Base Layer Slim Muscle</h1>
-          <div class="detail-meta">
-            <span class="stars-orange">★★★★☆</span> <span class="rating-num">9.3</span>
-            <span class="meta-dot">·</span> <i class="fa-regular fa-message"></i> 32 reviews
-            <span class="meta-dot">·</span> <i class="fa-solid fa-basket-shopping"></i> 154 sold
-          </div>
-          <div class="price-tiers">
-            <div class="tier active"><span class="tier-price">$98.00</span><small>50-100 pcs</small></div>
-            <div class="tier"><span class="tier-price">$90.00</span><small>100-700 pcs</small></div>
-            <div class="tier"><span class="tier-price">$78.00</span><small>700+ pcs</small></div>
-          </div>
-          <table class="detail-specs">
-            <tr><td>Price:</td><td>Negotiable</td></tr>
-            <tr><td>Type:</td><td>Classic shoes</td></tr>
-            <tr><td>Material:</td><td>Plastic material</td></tr>
-            <tr><td>Design:</td><td>Modern nice</td></tr>
-            <tr><td>Customization:</td><td>Customized logo and design custom packages</td></tr>
-            <tr><td>Protection:</td><td>Refund Policy</td></tr>
-            <tr><td>Warranty:</td><td>2 years full warranty</td></tr>
-          </table>
+          <h1 class="detail-title">Product Name</h1>
+          <div class="detail-meta"><span class="stars-orange">★★★★☆</span> <span class="rating-num">4.5</span><span class="meta-dot">·</span><i class="fa-regular fa-message"></i> 32 reviews<span class="meta-dot">·</span><i class="fa-solid fa-basket-shopping"></i> 154 sold</div>
+          <div class="price-tiers"><div class="tier active"><span class="tier-price">$98.00</span><small>50-100 pcs</small></div><div class="tier"><span class="tier-price">$90.00</span><small>100-700 pcs</small></div><div class="tier"><span class="tier-price">$78.00</span><small>700+ pcs</small></div></div>
+          <table class="detail-specs"><tr><td>Price:</td><td>Negotiable</td></tr></table>
         </div>
-
-        <!-- Right: Supplier -->
         <div class="detail-supplier">
           <div class="supplier-card">
-            <div class="supplier-top">
-              <div class="supplier-avatar">R</div>
-              <div><strong>Supplier</strong><br><span>Guanjoi Trading LLC</span></div>
-            </div>
-            <div class="supplier-details">
-              <p><img src="../images/flags/DE@2x.png" alt="" class="flag"> Germany, Berlin</p>
-              <p><i class="fa-solid fa-shield-halved"></i> Verified Seller</p>
-              <p><i class="fa-solid fa-globe"></i> Worldwide shipping</p>
-            </div>
-            <button class="btn-primary btn-block" onclick="addToCartFromDetail()">
-              <i class="fa-solid fa-cart-shopping"></i> Add to cart
-            </button>
-            <button class="btn-outline btn-block" onclick="alert('Inquiry sent to supplier!')">Send inquiry</button>
+            <div class="supplier-top"><div class="supplier-avatar">R</div><div><strong>Supplier</strong><br><span>Guanjoi Trading LLC</span></div></div>
+            <div class="supplier-details"><p><img src="../images/flags/DE@2x.png" alt="" class="flag"> Germany, Berlin</p><p><i class="fa-solid fa-shield-halved"></i> Verified Seller</p><p><i class="fa-solid fa-globe"></i> Worldwide shipping</p></div>
+            <button class="btn-primary btn-block" onclick="addToCartFromDetail()"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>
+            <button class="btn-outline btn-block" onclick="alert('Inquiry sent!')">Send inquiry</button>
           </div>
           <div class="save-later" onclick="saveForLaterDetail()"><i class="fa-regular fa-heart"></i> Save for later</div>
         </div>
       </div>
 
-      <!-- TABS -->
       <div class="detail-bottom">
         <div class="detail-tabs-area">
-          <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('description')">Description</button>
-            <button class="tab-btn" onclick="switchTab('reviews')">Reviews</button>
-            <button class="tab-btn" onclick="switchTab('shipping')">Shipping</button>
-            <button class="tab-btn" onclick="switchTab('seller')">About seller</button>
-          </div>
-          <div class="tab-content active" id="tab-description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <table class="specs-table">
-              <tr><td>Model</td><td>#8786867</td></tr>
-              <tr><td>Style</td><td>Classic style</td></tr>
-              <tr><td>Certificate</td><td>ISO-898921212</td></tr>
-              <tr><td>Size</td><td>34mm x 450mm x 19mm</td></tr>
-              <tr><td>Memory</td><td>36GB RAM</td></tr>
-            </table>
-            <div class="feature-checks">
-              <p><i class="fa-solid fa-check"></i> Some great feature name here</p>
-              <p><i class="fa-solid fa-check"></i> Lorem ipsum dolor sit amet, consectetur</p>
-              <p><i class="fa-solid fa-check"></i> Duis aute irure dolor in reprehenderit</p>
-              <p><i class="fa-solid fa-check"></i> Some great feature name here</p>
-            </div>
-          </div>
-          <div class="tab-content" id="tab-reviews"><p>No reviews yet. Be the first to write a review!</p></div>
-          <div class="tab-content" id="tab-shipping"><p>Estimated delivery: 5-10 business days. Free shipping on orders over $100.</p></div>
-          <div class="tab-content" id="tab-seller"><p>Guanjoi Trading LLC is a verified seller from Berlin, Germany. Established in 2015.</p></div>
+          <div class="tabs-nav"><button class="tab-btn active" onclick="switchTab('description')">Description</button><button class="tab-btn" onclick="switchTab('reviews')">Reviews</button><button class="tab-btn" onclick="switchTab('shipping')">Shipping</button><button class="tab-btn" onclick="switchTab('seller')">About seller</button></div>
+          <div class="tab-content active" id="tab-description"><p>Loading...</p></div>
+          <div class="tab-content" id="tab-reviews"><p>Loading...</p></div>
+          <div class="tab-content" id="tab-shipping"><p>Loading...</p></div>
+          <div class="tab-content" id="tab-seller"><p>Loading...</p></div>
         </div>
-
-        <!-- You may like -->
-        <div class="you-may-like">
-          <h3>You may like</h3>
-          <div class="like-list" id="youMayLike"></div>
-        </div>
+        <div class="you-may-like"><h3>You may like</h3><div class="like-list" id="youMayLike"></div></div>
       </div>
 
-      <!-- RELATED PRODUCTS -->
-      <section class="related-section">
-        <h2 class="section-title">Related products</h2>
-        <div class="related-grid" id="relatedProducts"></div>
-      </section>
-
+      <section class="related-section"><h2 class="section-title">Related products</h2><div class="related-grid" id="relatedProducts"></div></section>
     </div>
   </main>
 
-  <!-- DISCOUNT BANNER -->
-  <section class="discount-banner">
-    <div class="container">
-      <div class="discount-content">
-        <div><h3>Super discount on more than 100 USD</h3><p>Have you ever finally just write dummy info</p></div>
-        <a href="#" class="btn-shop-now">Shop now</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand"><div class="footer-logo"><img src="../images/brand/logo.png" alt="Brand" class="logo-img"></div><p>Best information about the company gies here but now lorem ipsum is</p><div class="footer-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div></div>
-        <div class="footer-column"><h4>About</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div>
-        <div class="footer-column"><h4>Partnership</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div>
-        <div class="footer-column"><h4>Information</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Money Refund</a></li><li><a href="#">Shipping</a></li><li><a href="#">Contact us</a></li></ul></div>
-        <div class="footer-column"><h4>For users</h4><ul><li><a href="#">Login</a></li><li><a href="#">Register</a></li><li><a href="#">Settings</a></li><li><a href="#">My Orders</a></li></ul></div>
-        <div class="footer-column"><h4>Get app</h4><div class="footer-apps"><a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt=""></a><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt=""></a></div></div>
-      </div>
-      <div class="footer-bottom"><p>&copy; 2023 Ecommerce.</p><div class="footer-lang"><img src="../images/flags/US@2x.png" alt="" class="flag"><span>English</span><i class="fa-solid fa-chevron-up"></i></div></div>
-    </div>
-  </footer>
+  <section class="discount-banner"><div class="container"><div class="discount-content"><div><h3>Super discount on more than 100 USD</h3><p>Have you ever finally just write dummy info</p></div><a href="product-listing.html?filter=deals" class="btn-shop-now">Shop now</a></div></div></section>
+  <footer class="footer"><div class="container"><div class="footer-top"><div class="footer-brand"><div class="footer-logo"><img src="../images/brand/logo.png" alt="Brand" class="logo-img"></div><p>Best information about the company gies here but now lorem ipsum is</p><div class="footer-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div></div><div class="footer-column"><h4>About</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div><div class="footer-column"><h4>Partnership</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div><div class="footer-column"><h4>Information</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Money Refund</a></li><li><a href="#">Shipping</a></li><li><a href="#">Contact us</a></li></ul></div><div class="footer-column"><h4>For users</h4><ul><li><a href="#">Login</a></li><li><a href="#">Register</a></li><li><a href="#">Settings</a></li><li><a href="#">My Orders</a></li></ul></div><div class="footer-column"><h4>Get app</h4><div class="footer-apps"><a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt=""></a><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt=""></a></div></div></div><div class="footer-bottom"><p>&copy; 2023 Ecommerce.</p><div class="footer-lang"><img src="../images/flags/US@2x.png" alt="" class="flag"><span>English</span><i class="fa-solid fa-chevron-up"></i></div></div></div></footer>
 
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>

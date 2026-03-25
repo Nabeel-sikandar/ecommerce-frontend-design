@@ -1,11 +1,15 @@
 /* ============================================================
-   HEADER.CSS — Top Header + Sub Navigation
+   HEADER.CSS — Sticky Navbar, Search, Icons, Sub Nav,
+                Dropdowns, Modals
    ============================================================ */
 
-/* --- Main Header Bar --- */
+/* --- Main Header (STICKY - locked at top) --- */
 .header {
   background: var(--bg-white);
   border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .header-top {
@@ -16,7 +20,6 @@
   gap: 16px;
 }
 
-/* Logo */
 .header-logo {
   display: flex;
   align-items: center;
@@ -24,7 +27,7 @@
   flex-shrink: 0;
 }
 
-/* Search Bar */
+/* --- Search Bar --- */
 .header-search {
   display: flex;
   flex: 1;
@@ -62,7 +65,7 @@
 }
 .header-search .search-btn:hover { background: var(--primary-blue-hover); }
 
-/* Header Icons (Profile, Message, Orders, Cart) */
+/* --- Header Icons --- */
 .header-icons {
   display: flex;
   align-items: center;
@@ -92,10 +95,13 @@
   color: var(--primary-blue);
 }
 
-/* --- Sub Navigation --- */
+/* --- Sub Navigation (STICKY - below header) --- */
 .header-bottom {
   background: var(--bg-white);
   border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 65px;
+  z-index: 998;
 }
 
 .header-bottom .container {
@@ -156,4 +162,142 @@
 .nav-right .ship-select i {
   font-size: 10px;
   color: var(--text-gray);
+}
+
+/* ============================================================
+   DROPDOWNS — Help, Language, Ship to
+   ============================================================ */
+.nav-dropdown-wrap {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  min-width: 180px;
+  z-index: 1000;
+  margin-top: 8px;
+  flex-direction: column;
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+.dropdown-menu a {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--text-dark);
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--bg-gray);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+}
+
+.dropdown-menu a .flag {
+  width: 22px;
+  height: 16px;
+}
+
+/* ============================================================
+   MODALS — Profile, Messages, Orders
+   ============================================================ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  width: 380px;
+  max-width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modal-header button {
+  font-size: 24px;
+  color: var(--text-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s;
+}
+.modal-header button:hover { color: var(--text-dark); }
+
+.modal-body {
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.modal-body p {
+  font-size: 14px;
+  color: var(--text-gray);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.modal-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.modal-avatar i {
+  font-size: 28px;
+  color: var(--primary-blue);
+}
+
+.modal-body .btn-primary,
+.modal-body .btn-outline {
+  margin-bottom: 8px;
 }

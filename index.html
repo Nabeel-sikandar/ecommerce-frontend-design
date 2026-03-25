@@ -22,14 +22,19 @@
         <img src="images/brand/logo.png" alt="Brand" class="logo-img">
       </a>
       <div class="header-search">
-        <input type="text" placeholder="Search">
-        <select><option>All category</option><option>Automobiles</option><option>Clothes and wear</option><option>Home interiors</option><option>Computer and tech</option><option>Tools & equipments</option><option>Sports and outdoor</option><option>Animal and pets</option></select>
-        <button class="search-btn">Search</button>
+        <input type="text" placeholder="Search" id="searchInput">
+        <select id="searchCategory">
+          <option value="">All category</option>
+          <option value="clothes">Clothes and wear</option>
+          <option value="home">Home interiors</option>
+          <option value="electronics">Computer and tech</option>
+        </select>
+        <button class="search-btn" onclick="handleSearch()">Search</button>
       </div>
       <nav class="header-icons">
-        <a href="#" class="header-icon-item"><i class="fa-regular fa-user"></i><span>Profile</span></a>
-        <a href="#" class="header-icon-item"><i class="fa-regular fa-message"></i><span>Message</span></a>
-        <a href="#" class="header-icon-item"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('profileModal')"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('messageModal')"><i class="fa-regular fa-message"></i><span>Message</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('ordersModal')"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
         <a href="pages/cart.html" class="header-icon-item"><i class="fa-solid fa-cart-shopping"></i><span>My cart</span></a>
       </nav>
     </div>
@@ -38,19 +43,80 @@
   <nav class="header-bottom">
     <div class="container">
       <div class="nav-left">
-        <a href="#" class="all-category"><i class="fa-solid fa-bars"></i><span>All category</span></a>
-        <a href="#">Hot offers</a><a href="#">Gift boxes</a><a href="#">Projects</a><a href="#">Menu Item</a>
-        <a href="#" class="nav-link-dropdown"><span>Help</span><i class="fa-solid fa-chevron-down"></i></a>
+        <a href="pages/product-listing.html?category=all" class="all-category"><i class="fa-solid fa-bars"></i><span>All category</span></a>
+        <a href="pages/product-listing.html?filter=deals">Hot offers</a>
+        <a href="pages/product-listing.html?category=clothes">Gift boxes</a>
+        <a href="pages/product-listing.html?category=electronics">Projects</a>
+        <a href="pages/product-listing.html?category=home">Menu Item</a>
+        <div class="nav-dropdown-wrap">
+          <a href="#" class="nav-link-dropdown" onclick="toggleDropdown('helpDropdown', event)"><span>Help</span><i class="fa-solid fa-chevron-down"></i></a>
+          <div class="dropdown-menu" id="helpDropdown">
+            <a href="#">Help Center</a>
+            <a href="#">Money Refund</a>
+            <a href="#">Shipping Info</a>
+            <a href="#">Contact Us</a>
+          </div>
+        </div>
       </div>
       <div class="nav-right">
-        <div class="lang-select"><span>English, USD</span><i class="fa-solid fa-chevron-down"></i></div>
-        <div class="ship-select"><span>Ship to</span><img src="images/flags/DE@2x.png" alt="Flag" class="flag"><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="nav-dropdown-wrap">
+          <div class="lang-select" onclick="toggleDropdown('langDropdown', event)"><span>English, USD</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="langDropdown">
+            <a href="#" onclick="changeLang('English, USD', event)">English, USD</a>
+            <a href="#" onclick="changeLang('Urdu, RS', event)">اردو, PKR</a>
+            <a href="#" onclick="changeLang('Deutsch, EUR', event)">Deutsch, EUR</a>
+            <a href="#" onclick="changeLang('Français, EUR', event)">Français, EUR</a>
+            <a href="#" onclick="changeLang('Русский, RUB', event)">Русский, RUB</a>
+          </div>
+        </div>
+        <div class="nav-dropdown-wrap">
+          <div class="ship-select" onclick="toggleDropdown('shipDropdown', event)"><span>Ship to</span><img src="images/flags/DE@2x.png" alt="Flag" class="flag" id="shipFlag"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="shipDropdown">
+            <a href="#" onclick="changeShip('images/flags/DE@2x.png', 'Germany', event)"><img src="images/flags/DE@2x.png" class="flag"> Germany</a>
+            <a href="#" onclick="changeShip('images/flags/US@2x.png', 'USA', event)"><img src="images/flags/US@2x.png" class="flag"> United States</a>
+            <a href="#" onclick="changeShip('images/flags/GB@2x.png', 'UK', event)"><img src="images/flags/GB@2x.png" class="flag"> United Kingdom</a>
+            <a href="#" onclick="changeShip('images/flags/FR@2x.png', 'France', event)"><img src="images/flags/FR@2x.png" class="flag"> France</a>
+            <a href="#" onclick="changeShip('images/flags/CN@2x.png', 'China', event)"><img src="images/flags/CN@2x.png" class="flag"> China</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
 
-  <main class="main-content">
+  <!-- MODALS -->
+  <div class="modal-overlay" id="profileModal">
+    <div class="modal-box">
+      <div class="modal-header"><h3>Profile</h3><button onclick="closeModal('profileModal')">&times;</button></div>
+      <div class="modal-body">
+        <div class="modal-avatar"><i class="fa-regular fa-user"></i></div>
+        <p>Welcome! Please log in to view your profile.</p>
+        <button class="btn-primary btn-block" onclick="closeModal('profileModal')">Log in</button>
+        <button class="btn-outline btn-block" onclick="closeModal('profileModal')">Register</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="messageModal">
+    <div class="modal-box">
+      <div class="modal-header"><h3>Messages</h3><button onclick="closeModal('messageModal')">&times;</button></div>
+      <div class="modal-body">
+        <i class="fa-regular fa-message" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i>
+        <p>No messages yet. Start a conversation with a supplier!</p>
+        <button class="btn-primary" onclick="closeModal('messageModal')">Browse Suppliers</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="ordersModal">
+    <div class="modal-box">
+      <div class="modal-header"><h3>My Orders</h3><button onclick="closeModal('ordersModal')">&times;</button></div>
+      <div class="modal-body">
+        <i class="fa-solid fa-box" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i>
+        <p>No orders yet. Start shopping to see your orders here!</p>
+        <a href="pages/product-listing.html?category=all" class="btn-primary" onclick="closeModal('ordersModal')">Shop Now</a>
+      </div>
+    </div>
+  </div>
 
+  <main class="main-content">
     <!-- HERO -->
     <section class="hero">
       <div class="container">
@@ -74,9 +140,7 @@
               <h1 class="hero-title">Electronic items</h1>
               <a href="pages/product-listing.html?category=electronics" class="btn-learn-more">Learn more</a>
             </div>
-            <div class="hero-banner-img">
-              <img src="images/backgrounds/hero-banner.png" alt="Electronics">
-            </div>
+            <div class="hero-banner-img"><img src="images/backgrounds/hero-banner.png" alt="Electronics"></div>
           </div>
           <aside class="hero-right">
             <div class="hero-user-card">
@@ -84,8 +148,8 @@
                 <div class="user-avatar"><i class="fa-regular fa-user"></i></div>
                 <p>Hi, user<br>let's get started</p>
               </div>
-              <a href="#" class="btn-primary btn-block">Join now</a>
-              <a href="#" class="btn-outline btn-block">Log in</a>
+              <a href="#" class="btn-primary btn-block" onclick="openModal('profileModal')">Join now</a>
+              <a href="#" class="btn-outline btn-block" onclick="openModal('profileModal')">Log in</a>
             </div>
             <div class="hero-promo-card orange">Get US $10 off with a new supplier</div>
             <div class="hero-promo-card teal">Send quotes with supplier preferences</div>
@@ -109,11 +173,11 @@
             </div>
           </div>
           <div class="deals-products">
-            <div class="deal-card"><div class="deal-img"><img src="images/tech/smartwatch.png" alt=""></div><p>Smart watches</p><span class="deal-badge red">-25%</span></div>
-            <div class="deal-card"><div class="deal-img"><img src="images/tech/laptop.png" alt=""></div><p>Laptops</p><span class="deal-badge orange">-15%</span></div>
-            <div class="deal-card"><div class="deal-img"><img src="images/tech/camera.png" alt=""></div><p>GoPro cameras</p><span class="deal-badge red">-40%</span></div>
-            <div class="deal-card"><div class="deal-img"><img src="images/tech/headphones-gaming.png" alt=""></div><p>Headphones</p><span class="deal-badge green">-25%</span></div>
-            <div class="deal-card"><div class="deal-img"><img src="images/tech/phone-red.png" alt=""></div><p>Canon cameras</p><span class="deal-badge red">-25%</span></div>
+            <div class="deal-card" onclick="goToProduct(12)"><div class="deal-img"><img src="images/tech/smartwatch.png" alt=""></div><p>Smart watches</p><span class="deal-badge red">-25%</span></div>
+            <div class="deal-card" onclick="goToProduct(10)"><div class="deal-img"><img src="images/tech/laptop.png" alt=""></div><p>Laptops</p><span class="deal-badge orange">-15%</span></div>
+            <div class="deal-card" onclick="goToProduct(6)"><div class="deal-img"><img src="images/tech/camera.png" alt=""></div><p>GoPro cameras</p><span class="deal-badge red">-40%</span></div>
+            <div class="deal-card" onclick="goToProduct(11)"><div class="deal-img"><img src="images/tech/headphones-gaming.png" alt=""></div><p>Headphones</p><span class="deal-badge green">-25%</span></div>
+            <div class="deal-card" onclick="goToProduct(8)"><div class="deal-img"><img src="images/tech/phone-red.png" alt=""></div><p>Smartphones</p><span class="deal-badge red">-25%</span></div>
           </div>
         </div>
       </div>
@@ -128,14 +192,14 @@
             <a href="pages/product-listing.html?category=home" class="btn-source">Source now</a>
           </div>
           <div class="category-items">
-            <div class="category-item"><div class="cat-item-info"><p>Soft chairs</p><span>From<br>USD 19</span></div><img src="images/interior/chair.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Sofa & chair</p><span>From<br>USD 19</span></div><img src="images/interior/sofa.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Kitchen dishes</p><span>From<br>USD 19</span></div><img src="images/interior/kitchen-dish.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Smart watches</p><span>From<br>USD 19</span></div><img src="images/tech/smartwatch.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Kitchen mixer</p><span>From<br>USD 100</span></div><img src="images/interior/mixer.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Blenders</p><span>From<br>USD 39</span></div><img src="images/interior/blender.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Home appliance</p><span>From<br>USD 19</span></div><img src="images/interior/appliance.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Coffee maker</p><span>From<br>USD 19</span></div><img src="images/interior/coffee-maker.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(15)"><div class="cat-item-info"><p>Soft chairs</p><span>From<br>USD 19</span></div><img src="images/interior/chair.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(15)"><div class="cat-item-info"><p>Sofa & chair</p><span>From<br>USD 19</span></div><img src="images/interior/sofa.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(15)"><div class="cat-item-info"><p>Kitchen dishes</p><span>From<br>USD 19</span></div><img src="images/interior/kitchen-dish.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(12)"><div class="cat-item-info"><p>Smart watches</p><span>From<br>USD 19</span></div><img src="images/tech/smartwatch.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(14)"><div class="cat-item-info"><p>Kitchen mixer</p><span>From<br>USD 100</span></div><img src="images/interior/mixer.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(14)"><div class="cat-item-info"><p>Blenders</p><span>From<br>USD 39</span></div><img src="images/interior/blender.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(14)"><div class="cat-item-info"><p>Home appliance</p><span>From<br>USD 19</span></div><img src="images/interior/appliance.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(14)"><div class="cat-item-info"><p>Coffee maker</p><span>From<br>USD 19</span></div><img src="images/interior/coffee-maker.png" alt=""></div>
           </div>
         </div>
       </div>
@@ -150,14 +214,14 @@
             <a href="pages/product-listing.html?category=electronics" class="btn-source">Source now</a>
           </div>
           <div class="category-items">
-            <div class="category-item"><div class="cat-item-info"><p>Smart watches</p><span>From<br>USD 19</span></div><img src="images/tech/smartwatch.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Cameras</p><span>From<br>USD 89</span></div><img src="images/tech/camera.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Headphones</p><span>From<br>USD 10</span></div><img src="images/tech/headphones-gaming.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Smartphones</p><span>From<br>USD 19</span></div><img src="images/tech/phone-red.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Gaming set</p><span>From<br>USD 35</span></div><img src="images/tech/tablet.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Laptops & PC</p><span>From<br>USD 340</span></div><img src="images/tech/laptop.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Electric kettle</p><span>From<br>USD 240</span></div><img src="images/tech/kettle.png" alt=""></div>
-            <div class="category-item"><div class="cat-item-info"><p>Phone black</p><span>From<br>USD 19</span></div><img src="images/tech/phone-black.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(12)"><div class="cat-item-info"><p>Smart watches</p><span>From<br>USD 19</span></div><img src="images/tech/smartwatch.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(6)"><div class="cat-item-info"><p>Cameras</p><span>From<br>USD 89</span></div><img src="images/tech/camera.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(11)"><div class="cat-item-info"><p>Headphones</p><span>From<br>USD 10</span></div><img src="images/tech/headphones-gaming.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(8)"><div class="cat-item-info"><p>Smartphones</p><span>From<br>USD 19</span></div><img src="images/tech/phone-red.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(9)"><div class="cat-item-info"><p>Gaming set</p><span>From<br>USD 35</span></div><img src="images/tech/tablet.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(10)"><div class="cat-item-info"><p>Laptops & PC</p><span>From<br>USD 340</span></div><img src="images/tech/laptop.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(14)"><div class="cat-item-info"><p>Electric kettle</p><span>From<br>USD 240</span></div><img src="images/tech/kettle.png" alt=""></div>
+            <div class="category-item" onclick="goToProduct(7)"><div class="cat-item-info"><p>Phone black</p><span>From<br>USD 19</span></div><img src="images/tech/phone-black.png" alt=""></div>
           </div>
         </div>
       </div>
@@ -184,7 +248,7 @@
       </div>
     </section>
 
-    <!-- RECOMMENDED ITEMS -->
+    <!-- RECOMMENDED -->
     <section class="recommended-section">
       <div class="container">
         <h2 class="section-title">Recommended items</h2>
@@ -247,18 +311,13 @@
         <div class="footer-brand">
           <div class="footer-logo"><img src="images/brand/logo.png" alt="Brand" class="logo-img"></div>
           <p>Best information about the company gies here but now lorem ipsum is</p>
-          <div class="footer-socials">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a>
-          </div>
+          <div class="footer-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div>
         </div>
         <div class="footer-column"><h4>About</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div>
         <div class="footer-column"><h4>Partnership</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Find store</a></li><li><a href="#">Categories</a></li><li><a href="#">Blogs</a></li></ul></div>
         <div class="footer-column"><h4>Information</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Money Refund</a></li><li><a href="#">Shipping</a></li><li><a href="#">Contact us</a></li></ul></div>
         <div class="footer-column"><h4>For users</h4><ul><li><a href="#">Login</a></li><li><a href="#">Register</a></li><li><a href="#">Settings</a></li><li><a href="#">My Orders</a></li></ul></div>
-        <div class="footer-column"><h4>Get app</h4><div class="footer-apps">
-          <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"></a>
-        </div></div>
+        <div class="footer-column"><h4>Get app</h4><div class="footer-apps"><a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store"></a><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"></a></div></div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2023 Ecommerce.</p>

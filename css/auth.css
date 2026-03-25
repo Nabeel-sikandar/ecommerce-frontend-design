@@ -1,0 +1,499 @@
+/* ============================================================
+   AUTH.CSS — Login, Signup, Checkout, Profile Pages
+   ============================================================ */
+
+/* --- Auth Page Layout --- */
+.auth-section {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 15px;
+  background: var(--bg-gray);
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+}
+
+.auth-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.auth-card .auth-subtitle {
+  font-size: 14px;
+  color: var(--text-gray);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* --- Form Fields --- */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-dark);
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.form-group input::placeholder {
+  color: var(--text-light);
+}
+
+.form-group .input-icon {
+  position: relative;
+}
+
+.form-group .input-icon i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-gray);
+  font-size: 15px;
+}
+
+.form-group .input-icon input {
+  padding-left: 40px;
+}
+
+.form-group .input-icon .toggle-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-gray);
+  cursor: pointer;
+  font-size: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* --- Form Options (remember me, forgot) --- */
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.form-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-medium);
+}
+
+.form-options label input {
+  accent-color: var(--primary-blue);
+}
+
+.form-options a {
+  color: var(--primary-blue);
+  font-weight: 500;
+}
+
+/* --- Auth Buttons --- */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 16px;
+}
+
+.auth-btn:hover {
+  background: var(--primary-blue-hover);
+}
+
+.auth-btn.google {
+  background: #fff;
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.auth-btn.google:hover {
+  background: var(--bg-light);
+}
+
+.auth-btn.google img {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Divider --- */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  color: var(--text-gray);
+  font-size: 13px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* --- Auth Footer Link --- */
+.auth-footer {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-gray);
+  margin-top: 16px;
+}
+
+.auth-footer a {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+/* --- Form Row (2 columns) --- */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ============================================================
+   PROFILE PAGE
+   ============================================================ */
+.profile-section {
+  padding: 30px 0;
+}
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+}
+
+/* Profile Sidebar */
+.profile-sidebar {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.profile-avatar i {
+  font-size: 36px;
+  color: var(--primary-blue);
+}
+
+.profile-sidebar h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.profile-sidebar p {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-bottom: 16px;
+}
+
+.profile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.profile-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text-dark);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+}
+
+.profile-nav a:hover,
+.profile-nav a.active {
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+}
+
+.profile-nav a i {
+  width: 18px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* Profile Content Area */
+.profile-content {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.profile-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.profile-info-item label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-bottom: 4px;
+}
+
+.profile-info-item p {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.profile-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+/* ============================================================
+   CHECKOUT PAGE
+   ============================================================ */
+.checkout-section {
+  padding: 30px 0;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+}
+
+.checkout-form-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-block {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.checkout-block h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.payment-method:hover,
+.payment-method.active {
+  border-color: var(--primary-blue);
+  background: var(--primary-blue-light);
+}
+
+.payment-method input {
+  accent-color: var(--primary-blue);
+}
+
+.payment-method i {
+  font-size: 20px;
+  color: var(--text-gray);
+  width: 24px;
+  text-align: center;
+}
+
+.payment-method span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Order Summary Sidebar */
+.order-summary {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  height: fit-content;
+  position: sticky;
+  top: 140px;
+}
+
+.order-summary h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.order-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg-gray);
+}
+
+.order-item img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+}
+
+.order-item-info {
+  flex: 1;
+}
+
+.order-item-info p {
+  font-size: 13px;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.order-item-info small {
+  font-size: 12px;
+  color: var(--text-gray);
+}
+
+.order-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-totals {
+  margin-top: 16px;
+}
+
+.order-totals .summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.order-totals .summary-row.total {
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Success Message */
+.success-message {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+
+.success-message.show {
+  display: block;
+}
+
+.success-message i {
+  font-size: 60px;
+  color: var(--success-green);
+  margin-bottom: 16px;
+}
+
+.success-message h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  border: none;
+  padding: 0;
+}
+
+.success-message p {
+  font-size: 15px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
