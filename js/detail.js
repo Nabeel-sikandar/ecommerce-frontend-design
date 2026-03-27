@@ -14,10 +14,9 @@ function loadProductDetail() {
   document.querySelector('.detail-title').textContent = p.name;
   document.title = p.name + ' — Ecommerce';
 
-  var tiers = document.querySelectorAll('.tier-price');
-  if(tiers[0]) tiers[0].textContent = formatPrice(getPrice(p));
-  if(tiers[1]) tiers[1].textContent = formatPrice(getPrice(p) * 0.92);
-  if(tiers[2]) tiers[2].textContent = formatPrice(getPrice(p) * 0.80);
+  // Single price per product
+  var mainPrice = document.getElementById('mainPrice');
+  if(mainPrice) mainPrice.textContent = formatPrice(getPrice(p));
 
   var ratingEl = document.querySelector('.rating-num');
   if(ratingEl) ratingEl.textContent = p.rating;
@@ -31,9 +30,9 @@ function loadProductDetail() {
 
   var thumbContainer = document.querySelector('.detail-thumbnails');
   if(thumbContainer){
-    var related = products.filter(function(pr){return pr.category===p.category;}).slice(0,5);
-    thumbContainer.innerHTML = related.map(function(pr,i){
-      return '<img src="../'+pr.image+'" alt="'+pr.name+'" class="thumb '+(i===0?'active':'')+'" onclick="changeImage(this)">';
+    // Same product image x5 — simulating different views/angles of same product
+    thumbContainer.innerHTML = [0,1,2,3,4].map(function(i){
+      return '<img src="../' + p.image + '" alt="View ' + (i+1) + '" class="thumb ' + (i===0 ? 'active' : '') + '" onclick="changeImage(this)">';
     }).join('');
   }
 

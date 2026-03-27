@@ -78,13 +78,29 @@ function updateAuthUI(){
     }
   });
 
-  // Update header Profile label
+  // Update header Profile icon label
   document.querySelectorAll('.header-icon-item').forEach(function(item){
     var label=item.querySelector('span');
-    if(label&&label.textContent==='Profile'&&user){
+    if(label&&(label.textContent==='Profile'||label.textContent.trim()==='Profile')&&user){
       label.textContent=user.name.split(' ')[0];
     }
   });
+
+  // Update hero card (home page)
+  var heroGreet = document.querySelector('.hero-user-card p');
+  var heroJoin = document.querySelector('.hero-user-card .btn-primary');
+  var heroLogin = document.querySelector('.hero-user-card .btn-outline');
+  if(heroGreet){
+    if(user){
+      heroGreet.innerHTML = 'Hi, <strong>'+user.name.split(' ')[0]+'</strong><br>Welcome back!';
+      if(heroJoin){ heroJoin.textContent='View Profile'; heroJoin.href=prefix+'profile.html'; heroJoin.removeAttribute('onclick'); }
+      if(heroLogin){ heroLogin.textContent='My Orders'; heroLogin.href='#'; heroLogin.setAttribute('onclick',"openModal('ordersModal')"); }
+    } else {
+      heroGreet.innerHTML = 'Hi, user<br>let\'s get started';
+      if(heroJoin){ heroJoin.textContent='Join now'; heroJoin.href='#'; heroJoin.setAttribute('onclick',"openModal('profileModal')"); }
+      if(heroLogin){ heroLogin.textContent='Log in'; heroLogin.href='#'; heroLogin.setAttribute('onclick',"openModal('profileModal')"); }
+    }
+  }
 }
 
 /* === INIT === */

@@ -129,17 +129,36 @@ function loadProfile() {
 function editProfile() {
   var user = Auth.getUser();
   if (!user) return;
+  document.getElementById('editName').value    = user.name    || '';
+  document.getElementById('editPhone').value   = user.phone   || '';
+  document.getElementById('editAddress').value = user.address || '';
+  document.getElementById('editCity').value    = user.city    || '';
+  document.getElementById('editCountry').value = user.country || '';
+  openModal('editProfileModal');
+}
 
-  var name = prompt('Full Name:', user.name);
-  if (name === null) return;
-  var phone = prompt('Phone:', user.phone || '');
-  var address = prompt('Address:', user.address || '');
-  var city = prompt('City:', user.city || '');
-  var country = prompt('Country:', user.country || '');
-
-  Auth.updateProfile({ name: name || user.name, phone: phone || '', address: address || '', city: city || '', country: country || '' });
+function saveProfile() {
+  var user = Auth.getUser();
+  if (!user) return;
+  var name    = document.getElementById('editName').value.trim();
+  var phone   = document.getElementById('editPhone').value.trim();
+  var address = document.getElementById('editAddress').value.trim();
+  var city    = document.getElementById('editCity').value.trim();
+  var country = document.getElementById('editCountry').value.trim();
+  if (!name) { alert('Name cannot be empty.'); return; }
+  Auth.updateProfile({ name: name, phone: phone, address: address, city: city, country: country });
+  closeModal('editProfileModal');
   loadProfile();
-  alert('Profile updated!');
+  updateAuthUI();
+  showToast('Profile updated successfully!');
+}
+
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#00B517;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.15);';
+  document.body.appendChild(t);
+  setTimeout(function(){ t.remove(); }, 2800);
 }
 
 /* === CHECKOUT PAGE === */
@@ -216,28 +235,7 @@ function placeOrder(e) {
 }
 
 /* === UPDATE AUTH UI ON ALL PAGES === */
-function updateAuthUI() {
-  var user = Auth.getUser();
-  // Update profile modal content if logged in
-  var profileModals = document.querySelectorAll('#profileModal .modal-body');
-  profileModals.forEach(function(body) {
-    if (user) {
-      body.innerHTML = '<div class="modal-avatar"><i class="fa-regular fa-user"></i></div>' +
-        '<p style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">' + user.name + '</p>' +
-        '<p>' + user.email + '</p>' +
-        '<a href="' + (window.location.pathname.includes('/pages/') ? '' : 'pages/') + 'profile.html" class="btn-primary btn-block" style="margin-top:12px;">View Profile</a>' +
-        '<button class="btn-outline btn-block" onclick="Auth.logout()">Log out</button>';
-    }
-  });
-
-  // Update header Profile label
-  document.querySelectorAll('.header-icon-item').forEach(function(item) {
-    var label = item.querySelector('span');
-    if (label && label.textContent === 'Profile' && user) {
-      label.textContent = user.name.split(' ')[0];
-    }
-  });
-}
+// updateAuthUI is defined in common.js — just call it here
 
 document.addEventListener('DOMContentLoaded', function() {
   updateAuthUI();

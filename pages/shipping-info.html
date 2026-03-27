@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping Info - NBL Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #FF9017 0%, #e07800 100%);
+      padding: 52px 0;
+      text-align: center;
+      color: #fff;
+    }
+    .page-hero h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+    .page-hero p  { font-size: 15px; opacity: .9; }
+
+    .shipping-options { padding: 56px 0; }
+    .shipping-options h2 { font-size: 22px; font-weight: 700; margin-bottom: 32px; text-align: center; }
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .option-card {
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .option-card.featured { border-color: var(--primary-blue); }
+    .option-card.featured::before {
+      content: 'Most Popular';
+      position: absolute; top: 14px; right: -24px;
+      background: var(--primary-blue);
+      color: #fff;
+      font-size: 11px; font-weight: 600;
+      padding: 4px 32px;
+      transform: rotate(45deg);
+    }
+    .option-card .o-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    .option-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .option-card .price { font-size: 22px; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+    .option-card .price span { font-size: 13px; font-weight: 400; color: var(--text-gray); }
+    .option-card ul { list-style: none; padding: 0; }
+    .option-card ul li { font-size: 13px; color: var(--text-medium); padding: 5px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--bg-gray); }
+    .option-card ul li:last-child { border-bottom: none; }
+    .option-card ul li i { color: var(--success-green); font-size: 12px; }
+
+    .tracker-section {
+      background: var(--bg-light);
+      padding: 56px 0;
+    }
+    .tracker-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .tracker-section > .container > p { font-size: 14px; color: var(--text-gray); margin-bottom: 28px; }
+    .tracker-wrap {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 560px;
+    }
+    .tracker-input-row { display: flex; gap: 12px; margin-bottom: 24px; }
+    .tracker-input-row input {
+      flex: 1; padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+    }
+    .tracker-input-row input:focus { border-color: var(--primary-blue); outline: none; }
+    .track-result { display: none; }
+    .track-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      position: relative;
+    }
+    .track-status-bar::before {
+      content: '';
+      position: absolute;
+      top: 20px; left: 10%; right: 10%;
+      height: 3px;
+      background: var(--border-color);
+      z-index: 0;
+    }
+    .track-status-bar::after {
+      content: '';
+      position: absolute;
+      top: 20px; left: 10%; width: 55%;
+      height: 3px;
+      background: var(--success-green);
+      z-index: 1;
+    }
+    .track-step { text-align: center; position: relative; z-index: 2; flex: 1; }
+    .track-step .dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 16px;
+    }
+    .track-step .dot.done  { background: var(--success-green); color: #fff; }
+    .track-step .dot.active{ background: var(--primary-blue);  color: #fff; }
+    .track-step .dot.pending{ background: var(--bg-gray); color: var(--text-gray); }
+    .track-step p { font-size: 11px; color: var(--text-gray); font-weight: 500; }
+
+    .regions-section { padding: 56px 0; }
+    .regions-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 32px; text-align: center; }
+    .regions-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .regions-table th {
+      background: var(--primary-blue);
+      color: #fff;
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .regions-table td {
+      padding: 13px 18px;
+      font-size: 14px;
+      color: var(--text-medium);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .regions-table tr:last-child td { border-bottom: none; }
+    .regions-table tr:nth-child(even) td { background: var(--bg-light); }
+    .badge-free { background: #E8F8E8; color: var(--success-green); font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 20px; }
+    .badge-paid { background: #FFF3E0; color: var(--warning-orange); font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 20px; }
+
+    .info-cards { padding: 56px 0; background: var(--bg-light); }
+    .info-cards h2 { font-size: 22px; font-weight: 700; margin-bottom: 32px; text-align: center; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .info-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+    }
+    .info-card i { font-size: 28px; margin-bottom: 12px; }
+    .info-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .info-card p  { font-size: 13px; color: var(--text-gray); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-top container">
+      <a href="../index.html" class="header-logo"><img src="../images/brand/logo.png" alt="NBL Store" class="logo-img"></a>
+      <div class="header-search">
+        <input type="text" placeholder="Search" id="searchInput">
+        <select id="searchCategory">
+          <option value="">All category</option>
+          <option value="clothes">Clothes and wear</option>
+          <option value="home">Home interiors</option>
+          <option value="electronics">Computer and tech</option>
+        </select>
+        <button class="search-btn" onclick="handleSearch()">Search</button>
+      </div>
+      <nav class="header-icons">
+        <a href="#" class="header-icon-item" onclick="openModal('profileModal')"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('messageModal')"><i class="fa-regular fa-message"></i><span>Message</span></a>
+        <a href="#" class="header-icon-item" onclick="openModal('ordersModal')"><i class="fa-regular fa-heart"></i><span>Orders</span></a>
+        <a href="cart.html" class="header-icon-item"><i class="fa-solid fa-cart-shopping"></i><span>My cart</span></a>
+      </nav>
+    </div>
+  </header>
+  <nav class="header-bottom">
+    <div class="container">
+      <div class="nav-left">
+        <a href="product-listing.html?category=all" class="all-category"><i class="fa-solid fa-bars"></i><span>All category</span></a>
+        <a href="product-listing.html?filter=deals">Hot offers</a>
+        <a href="product-listing.html?category=clothes">Gift boxes</a>
+        <a href="product-listing.html?category=electronics">Projects</a>
+        <a href="product-listing.html?category=home">Menu Item</a>
+        <div class="nav-dropdown-wrap">
+          <a href="#" class="nav-link-dropdown" onclick="toggleDropdown('helpDropdown', event)"><span>Help</span><i class="fa-solid fa-chevron-down"></i></a>
+          <div class="dropdown-menu" id="helpDropdown">
+            <a href="help-center.html">Help Center</a>
+            <a href="money-refund.html">Money Refund</a>
+            <a href="shipping-info.html">Shipping Info</a>
+            <a href="contact-us.html">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-dropdown-wrap">
+          <div class="lang-select" onclick="toggleDropdown('langDropdown', event)"><span>English, USD</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="langDropdown">
+            <a href="#" onclick="changeLang('English, USD', event)">English, USD</a>
+            <a href="#" onclick="changeLang('Urdu, RS', event)">اردو, PKR</a>
+          </div>
+        </div>
+        <div class="nav-dropdown-wrap">
+          <div class="ship-select" onclick="toggleDropdown('shipDropdown', event)"><span>Ship to</span><img src="../images/flags/DE@2x.png" alt="" class="flag" id="shipFlag"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="dropdown-menu" id="shipDropdown">
+            <a href="#" onclick="changeShip('../images/flags/DE@2x.png','Germany',event)"><img src="../images/flags/DE@2x.png" class="flag"> Germany</a>
+            <a href="#" onclick="changeShip('../images/flags/US@2x.png','USA',event)"><img src="../images/flags/US@2x.png" class="flag"> USA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="profileModal"><div class="modal-box"><div class="modal-header"><h3>Profile</h3><button onclick="closeModal('profileModal')">&times;</button></div><div class="modal-body"><div class="modal-avatar"><i class="fa-regular fa-user"></i></div><p>Welcome! Please log in.</p><a href="login.html" class="btn-primary btn-block" style="display:block;margin-bottom:8px;text-align:center;">Log in</a><a href="signup.html" class="btn-outline btn-block" style="display:block;text-align:center;">Create Account</a></div></div></div>
+  <div class="modal-overlay" id="messageModal"><div class="modal-box"><div class="modal-header"><h3>Messages</h3><button onclick="closeModal('messageModal')">&times;</button></div><div class="modal-body"><i class="fa-regular fa-message" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i><p>No messages yet.</p><button class="btn-primary" onclick="closeModal('messageModal')">Close</button></div></div></div>
+  <div class="modal-overlay" id="ordersModal"><div class="modal-box"><div class="modal-header"><h3>My Orders</h3><button onclick="closeModal('ordersModal')">&times;</button></div><div class="modal-body"><i class="fa-solid fa-box" style="font-size:40px;color:var(--text-gray);margin-bottom:12px;"></i><p>No orders yet.</p><a href="product-listing.html?category=all" class="btn-primary" onclick="closeModal('ordersModal')">Shop Now</a></div></div></div>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div style="font-size:48px;margin-bottom:16px;"><i class="fa-solid fa-truck-fast"></i></div>
+      <h1>Shipping Information</h1>
+      <p>Fast, reliable delivery worldwide — from our warehouse to your door.</p>
+    </div>
+  </section>
+
+  <!-- BREADCRUMB -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="help-center.html">Help Center</a><i class="fa-solid fa-chevron-right"></i>
+      <span>Shipping Info</span>
+    </div>
+  </div>
+
+  <!-- SHIPPING OPTIONS -->
+  <section class="shipping-options">
+    <div class="container">
+      <h2>Shipping Options</h2>
+      <div class="options-grid">
+        <div class="option-card">
+          <div class="o-icon" style="color:var(--text-gray);">🚚</div>
+          <h3>Standard Shipping</h3>
+          <div class="price">Free <span>on orders over $50</span></div>
+          <ul>
+            <li><i class="fa-solid fa-check"></i>7–15 business days</li>
+            <li><i class="fa-solid fa-check"></i>$5.99 for orders under $50</li>
+            <li><i class="fa-solid fa-check"></i>Tracking number provided</li>
+            <li><i class="fa-solid fa-check"></i>Available worldwide</li>
+          </ul>
+        </div>
+        <div class="option-card featured">
+          <div class="o-icon" style="color:var(--primary-blue);">✈️</div>
+          <h3>Express Shipping</h3>
+          <div class="price">$12.99 <span>flat rate</span></div>
+          <ul>
+            <li><i class="fa-solid fa-check"></i>3–5 business days</li>
+            <li><i class="fa-solid fa-check"></i>Priority handling</li>
+            <li><i class="fa-solid fa-check"></i>Real-time tracking</li>
+            <li><i class="fa-solid fa-check"></i>Signature on delivery</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <div class="o-icon" style="color:var(--warning-orange);">⚡</div>
+          <h3>Overnight Shipping</h3>
+          <div class="price">$24.99 <span>flat rate</span></div>
+          <ul>
+            <li><i class="fa-solid fa-check"></i>1–2 business days</li>
+            <li><i class="fa-solid fa-check"></i>Order before 2 PM</li>
+            <li><i class="fa-solid fa-check"></i>Live tracking</li>
+            <li><i class="fa-solid fa-check"></i>Available in select regions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER TRACKER -->
+  <section class="tracker-section">
+    <div class="container">
+      <h2>Track Your Order</h2>
+      <p>Enter your order number or tracking ID to see the latest status.</p>
+      <div class="tracker-wrap">
+        <div class="tracker-input-row">
+          <input type="text" id="trackInput" placeholder="e.g. NBL-123456 or tracking ID">
+          <button class="btn-primary" onclick="trackOrder()"><i class="fa-solid fa-magnifying-glass" style="margin-right:6px;"></i>Track</button>
+        </div>
+        <div class="track-result" id="trackResult">
+          <div style="padding:16px;background:var(--bg-light);border-radius:8px;margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <strong id="trackOrderId">NBL-123456</strong>
+                <p style="font-size:13px;color:var(--text-gray);margin-top:2px;">Estimated delivery: <span id="trackETA">Mar 28, 2026</span></p>
+              </div>
+              <span style="background:#FFF3E0;color:#FF9017;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;">In Transit</span>
+            </div>
+          </div>
+          <div class="track-status-bar">
+            <div class="track-step"><div class="dot done"><i class="fa-solid fa-check"></i></div><p>Order Placed</p></div>
+            <div class="track-step"><div class="dot done"><i class="fa-solid fa-check"></i></div><p>Confirmed</p></div>
+            <div class="track-step"><div class="dot active"><i class="fa-solid fa-truck"></i></div><p>In Transit</p></div>
+            <div class="track-step"><div class="dot pending"><i class="fa-solid fa-box"></i></div><p>Delivered</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGIONS TABLE -->
+  <section class="regions-section">
+    <div class="container">
+      <h2>Shipping by Region</h2>
+      <table class="regions-table">
+        <thead>
+          <tr>
+            <th>Region</th>
+            <th>Standard</th>
+            <th>Express</th>
+            <th>Delivery Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>🇺🇸 United States</td><td><span class="badge-free">Free over $50</span></td><td>$12.99</td><td>5–10 days</td></tr>
+          <tr><td>🇬🇧 United Kingdom</td><td><span class="badge-free">Free over $50</span></td><td>$12.99</td><td>7–12 days</td></tr>
+          <tr><td>🇩🇪 Germany</td><td><span class="badge-free">Free over $50</span></td><td>$12.99</td><td>7–12 days</td></tr>
+          <tr><td>🇫🇷 France</td><td><span class="badge-paid">$5.99</span></td><td>$14.99</td><td>7–14 days</td></tr>
+          <tr><td>🇵🇰 Pakistan</td><td><span class="badge-free">Free over $50</span></td><td>$9.99</td><td>10–15 days</td></tr>
+          <tr><td>🇦🇪 UAE</td><td><span class="badge-paid">$5.99</span></td><td>$12.99</td><td>8–12 days</td></tr>
+          <tr><td>🌍 Rest of World</td><td><span class="badge-paid">$8.99</span></td><td>$18.99</td><td>14–21 days</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- INFO CARDS -->
+  <section class="info-cards">
+    <div class="container">
+      <h2>Good to Know</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <i class="fa-solid fa-box-open" style="color:var(--primary-blue);"></i>
+          <h4>Packaging</h4>
+          <p>All items are carefully packed in protective materials to prevent damage during transit.</p>
+        </div>
+        <div class="info-card">
+          <i class="fa-solid fa-clock" style="color:var(--warning-orange);"></i>
+          <h4>Cut-off Time</h4>
+          <p>Orders placed before 2 PM (GMT) are processed the same business day.</p>
+        </div>
+        <div class="info-card">
+          <i class="fa-solid fa-file-invoice" style="color:var(--success-green);"></i>
+          <h4>Customs & Duties</h4>
+          <p>International orders may be subject to import duties. These are the buyer's responsibility.</p>
+        </div>
+        <div class="info-card">
+          <i class="fa-solid fa-rotate" style="color:var(--danger-red);"></i>
+          <h4>Delays</h4>
+          <p>During holidays or sale periods, shipping may take 2–3 extra business days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo"><img src="../images/brand/logo.png" alt="Brand" class="logo-img"></div>
+          <p>Best information about the company goes here but now lorem ipsum is</p>
+          <div class="footer-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div>
+        </div>
+        <div class="footer-column"><h4>About</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Categories</a></li></ul></div>
+        <div class="footer-column"><h4>Help</h4><ul><li><a href="help-center.html">Help Center</a></li><li><a href="money-refund.html">Money Refund</a></li><li><a href="shipping-info.html">Shipping Info</a></li><li><a href="contact-us.html">Contact Us</a></li></ul></div>
+        <div class="footer-column"><h4>For users</h4><ul><li><a href="login.html">Login</a></li><li><a href="signup.html">Register</a></li><li><a href="profile.html">My Profile</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 NBL Store.</p></div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    function trackOrder() {
+      var val = document.getElementById('trackInput').value.trim();
+      if (!val) { alert('Please enter an order number or tracking ID.'); return; }
+      document.getElementById('trackOrderId').textContent = val;
+      var eta = new Date(); eta.setDate(eta.getDate() + 3);
+      document.getElementById('trackETA').textContent = eta.toDateString();
+      document.getElementById('trackResult').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
