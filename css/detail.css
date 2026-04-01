@@ -83,14 +83,27 @@
 .meta-dot { color: var(--text-light); }
 
 /* Price Tiers */
-.single-price {
+.single-price-box {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 12px;
+  padding: 18px 24px;
+  background: #FFF3E3;
+  border-radius: var(--radius-md);
+  border: 1px solid #FFD9A8;
   margin-bottom: 20px;
+  width: fit-content;
+  min-width: 200px;
 }
-.tier-price { font-size: 28px; font-weight: 700; color: var(--text-dark); }
-.price-label { font-size: 14px; color: var(--text-gray); }
+.main-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #E05A00;
+}
+.price-label {
+  font-size: 13px;
+  color: var(--text-gray);
+}
 
 /* Specs Table */
 .detail-specs { width: 100%; border-collapse: collapse; }

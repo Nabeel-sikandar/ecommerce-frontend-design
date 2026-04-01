@@ -196,11 +196,28 @@
   padding: 24px;
   display: flex; flex-direction: column;
   justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
 }
-.category-banner.blue-gradient { background: linear-gradient(180deg, #E3F0FF, #FFF); }
-.category-banner.orange-gradient { background: linear-gradient(180deg, #FFEEE2, #FFF); }
 
-.category-banner h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+/* Background image + light overlay so text stays readable */
+.category-banner.blue-gradient {
+  background:
+    linear-gradient(to bottom, rgba(227,240,255,0.55) 0%, rgba(255,255,255,0.85) 100%),
+    url('../images/interior/sofa.png') center center / cover no-repeat;
+}
+.category-banner.orange-gradient {
+  background:
+    linear-gradient(to bottom, rgba(255,238,226,0.55) 0%, rgba(255,255,255,0.85) 100%),
+    url('../images/backgrounds/electronics-bg.png') center center / cover no-repeat;
+}
+
+/* Ensure text is always on top */
+.category-banner h3,
+.category-banner .btn-source { position: relative; z-index: 1; }
+
+.category-banner h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; color: var(--text-dark); }
 
 .btn-source {
   display: inline-block;
@@ -247,45 +264,61 @@
 .quote-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: linear-gradient(135deg, #127FFF, #56A8F5);
   border-radius: var(--radius-lg);
   overflow: hidden;
   min-height: 340px;
+  position: relative;
+  /* Background image with blue overlay — like the design reference */
+  background:
+    linear-gradient(135deg, rgba(18,127,255,0.88) 0%, rgba(86,168,245,0.75) 100%),
+    url('../images/backgrounds/boxes.png') center center / cover no-repeat;
 }
 
 .quote-info {
-  padding: 40px;
+  padding: 48px 40px;
   color: #fff;
   display: flex; flex-direction: column;
   justify-content: center;
 }
-.quote-info h2 { font-size: 26px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
-.quote-info p { font-size: 15px; opacity: 0.85; line-height: 1.6; }
+.quote-info h2 { font-size: 26px; font-weight: 700; margin-bottom: 14px; line-height: 1.35; }
+.quote-info p { font-size: 15px; opacity: 0.88; line-height: 1.65; max-width: 360px; }
 
 .quote-form-wrap {
   background: #fff;
   border-radius: var(--radius-md);
-  padding: 24px;
-  margin: 24px 24px 24px 0;
+  padding: 28px 24px;
+  margin: 28px 28px 28px 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.quote-form-wrap h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+.quote-form-wrap h3 { font-size: 17px; font-weight: 600; margin-bottom: 16px; color: var(--text-dark); }
 
 .quote-form { display: flex; flex-direction: column; gap: 12px; }
 
 .quote-form input,
 .quote-form textarea,
 .quote-form select {
-  padding: 10px 14px;
+  padding: 11px 14px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-size: 14px;
   resize: none;
+  transition: border-color 0.2s;
+}
+.quote-form input:focus,
+.quote-form textarea:focus,
+.quote-form select:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
 }
 
 .quote-row { display: flex; gap: 8px; }
 .quote-row input { flex: 1; }
 .quote-row select { width: 80px; }
-.quote-form .btn-primary { width: fit-content; }
+.quote-form .btn-primary { width: fit-content; padding: 11px 24px; font-size: 15px; }
 
 
 /* --- Recommended Items --- */
